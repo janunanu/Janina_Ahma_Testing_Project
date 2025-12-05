@@ -22,6 +22,6 @@ I used Visual Studio Code to edit the files, as I am familiar with it and it was
 
 The manual steps I wrote are very clear, so I think they could be put into a simple spreadsheet (like Excel) or maybe a dedicated tool like TestRail so other testers could see them easily.
 
-In-Demand Skills: By looking at job postings for "Tester" and "Automation Tester" on Glassdoor and LinkedIn, it seems the most important skills right now are Test Automation (using tools like Selenium/Cypress/Python) and knowledge of SQL (for checking database data).
+By looking at job postings for "Tester" and "Automation Tester" it seems the most important skills right now are Test Automation (using tools like Selenium/Cypress/Python) and knowledge of SQL.
 
 I actually discussed with a representative of a big company about their testing processes and turns out they also use Robot Framework and any knowledge in that are would be useful in applying for example for a trainee position.
