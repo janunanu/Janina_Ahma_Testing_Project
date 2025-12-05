@@ -21,7 +21,11 @@
 ## Relevant logs and/or screenshots
 
      Bug Screenshot (Current Behavior)
-     ![Bug Screenshot](Image/Bug_Project_create_blank.png)
+      Bug Screenshot (Current Behavior)
+ ![Bug Screenshot](Image/Bug_Project_create_blank.png)
+
+ Expected Screenshot (Correct Behavior)
+ ![Fixed Screenshot](Image/Bug_Screenshot.png)
 
      Expected Screenshot (Correct Behavior)
      ![Fixed Screenshot](Image/Bug_Screenshot.png)
