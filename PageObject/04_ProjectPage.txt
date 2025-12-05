@@ -1,0 +1,87 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Test Suite for Project Management functionality on GitLab. Covers Create, Update, and Delete operations for both Blank and Template projects.
+
+Pre Condition	User must be logged in with valid credentials (from 03_RegisterPage) and have permission to create projects.
+ 
+Post Condition	Project is successfully deleted or created, returning the system to a clean state.
+
+Tags	Project, CRUD, Functional, TS-3-Project
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+
+PROJECT_NEW_URL = https://gitlab.com/projects/new
+PROJECT_NAME_BLANK = Blank Project Test A
+PROJECT_NAME_TEMPLATE = Template Project Test B
+PROJECT_UPDATED_NAME = Template Project Test B - Updated
+PROJECT_SLUG = project-test
+PROJECT_DESC = A test project for the assignment.
+VISIBILITY_PRIVATE = Private
+VISIBILITY_PUBLIC = Public
+PROJECT_OWNER = @TestUserGitlab2025 # Assuming this is the registered user's username
+EMPTY =
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Create blank project
+	Process Step One	Navigate to the Project Creation page: ${PROJECT_NEW_URL}
+	Step Two	Select the 'Create blank project' tab.
+	Step Three	Input Project Name: ${PROJECT_NAME_BLANK}
+	Step Four	Input Project Slug (optional, for path): ${PROJECT_SLUG}
+	Step Five	Select Visibility Level: ${VISIBILITY_PRIVATE}
+	Step Six	Click the 'Create project' button
+	Verification or Validation Steps With Expected Data	 Project is created successfully. Validate that message is showing "Project 'Blank Project Test A' was successfully created." Assert the user is redirected to the new project's main page.
+
+	Create template project 
+	Process Step One	Navigate to the Project Creation page: ${PROJECT_NEW_URL}
+	Step Two	Select the 'Create from template' tab.
+	Step Three	Select a predefined template (e.g., 'Jira Integration').
+	Step Four	Click 'Use template'.
+	Step Five	Input Project Name: ${PROJECT_NAME_TEMPLATE}
+	Step Six	Input Project URL (group/username): ${PROJECT_OWNER}
+	Step Seven	Click the 'Create project' button
+	Verification or Validation Steps With Expected Data	 Project is created successfully based on the template. Validate the success message is shown. Assert the new project contains files/structure from the chosen template.
+
+	Update name of template project
+	Pre Condition	Project 'Template Project Test B' must exist (from previous test case).
+	Process Step One	Navigate to the existing 'Template Project Test B' Settings > General page.
+	Step Two	Change the Project Name field to: ${PROJECT_UPDATED_NAME}
+	Step Three	Click the 'Save changes' button.
+	Verification or Validation Steps With Expected Data  Project name is successfully updated. Assert that the page header now displays "Template Project Test B - Updated".
+
+	Delete template project
+	Pre Condition	Project 'Template Project Test B - Updated' must exist.
+	Process Step One	Go to the project settings page (look for Settings > General).
+	Step Two	Scroll down to the 'Advanced' or 'Danger Zone' section.
+	Step Three	Click the 'Remove project' or 'Delete project' button.
+	Step Four	Confirm deletion by typing the exact project name (${PROJECT_UPDATED_NAME}) into the confirmation box.
+	Step Five	Click the final confirmation button (e.g., 'Yes, delete project').
+	Verification or Validation Steps With Expected Data	 Project is permanently deleted. Check that the user is redirected to the Dashboard or Groups page, and a success message is displayed (e.g., "Project was successfully deleted.").
+
+	
+
+# Negative Test examples are below write test process steps for each below test case
+
+	Create a blank project with the previous same name Pre Condition	
+	Project 'Blank Project Test A' must still exist.
+	Process Step One	Navigate to the Project Creation page: ${PROJECT_NEW_URL}
+	Step Two	Select the 'Create blank project' tab.
+	Step Three	Input Project Name: ${PROJECT_NAME_BLANK} (Same name as existing project)
+	Step Four	Input Project Slug: ${PROJECT_SLUG} (GitLab auto-generates the path, which conflicts)
+	Step Five	Select Visibility Level: ${VISIBILITY_PRIVATE}
+	Step Six	Click the 'Create project' button
+	Verification or Validation Steps With Expected Data	 Project creation fails due to path conflict. Assert that a validation error is displayed next to the Project path field, stating: "Path is already taken" or "The path has already been used."
+
+

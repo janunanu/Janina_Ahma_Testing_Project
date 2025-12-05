@@ -1,0 +1,84 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Testing how to create, change, and delete issues (bugs or tasks) inside a project on GitLab.
+
+# TODO: Write Precondition and Postcondition, Tags 
+
+Pre Condition	User is logged in, and a test project exists.
+
+Post Condition	After testing, any created issues should be deleted to keep the project clean.
+
+Tags	Issue, Basic Test, Functional, TS-4-Issue
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+
+PROJECT_SLUG = TestUserGitlab2025/blank-project-test-a # Assuming this path based on 04_ProjectPage
+ISSUE_NEW_URL = https://www.google.com/search?q=https://gitlab.com/%24{PROJECT_SLUG}/-/issues/new
+ISSUE_TITLE_1 = First Issue to be Updated
+ISSUE_DESCRIPTION_1 = This issue is for testing the update and delete functionality.
+ISSUE_TITLE_UPDATED = Updated Issue Title for Test
+ISSUE_TITLE_2 = Second Issue with Updated Name Check
+ISSUE_LABEL = Bug
+EMPTY =
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Create issue
+
+	Pre Condition	The test project exists.
+	Process Step One	Go to the "New Issue" page using the link: ${ISSUE_NEW_URL}
+	Step Two	Type the title: ${ISSUE_TITLE_1}
+	Step Three	Type the description: ${ISSUE_DESCRIPTION_1}
+	Step Four	Select the label: ${ISSUE_LABEL}
+	Step Five	Click the large 'Create issue' button at the bottom of the page.
+	Verification or Validation Steps With Expected Data	
+	The task should be created successfully. 
+	Check that you see a success message (like "The issue has been successfully created.") 
+	and the page switches to show the newly created task.
+	
+ 	Update name of issue
+
+	Pre Condition	The task with the title '${ISSUE_TITLE_1}' must exist.
+	Process Step One	Go to the detail page for the task titled '${ISSUE_TITLE_1}'.
+	Step Two	Look for and click the 'Edit' button (it usually looks like a pencil icon).
+	Step Three	Change the Title box to: ${ISSUE_TITLE_UPDATED}
+	Step Four	Click the 'Save changes' button to confirm the update.
+	Verification or Validation Steps With Expected Data	
+	The task's title should immediately change. 
+	Check that the new title '${ISSUE_TITLE_UPDATED}' is displayed at the top of the page.
+
+	Create second issue with privious updated name
+
+	Pre Condition	The test project exists.
+	Process Step One	Go back to the "New Issue" page: ${ISSUE_NEW_URL}
+	Step Two	Type a new title: ${ISSUE_TITLE_2}
+	Step Three	Type a brief description (e.g., Description for second issue).
+	Step Four	Click the 'Create issue' button.
+	Verification or Validation Steps With Expected Data	
+	The second task should be created without any problems. 
+	This confirms that updating the first task did not cause errors for new tasks.
+
+    Delete first issue
+
+	Pre Condition	The task with the updated title '${ISSUE_TITLE_UPDATED}' must exist.
+	Process Step One	Go to the detail page for the task titled '${ISSUE_TITLE_UPDATED}'.
+	Step Two	Click the 'Edit' button (pencil icon).
+	Step Three	Look for and click the 'Delete issue' option (it is often in a dangerous settings section).
+	Step Four	Click 'Yes' or 'Confirm' in the warning box to confirm you want to delete it.
+	Verification or Validation Steps With Expected Data	
+	The task should be permanently removed. 
+	The page should switch to the list of all tasks, and a success message should appear 
+	(like "The issue was successfully deleted.").
